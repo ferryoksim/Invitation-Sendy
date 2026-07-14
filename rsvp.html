@@ -70,6 +70,101 @@
     }
   </script>
 <script src="js/effects.js"></script>
-  <script src="js/rsvp.js"></script>
+<!-- ENGINE RSVP TO WHATSAPP DIRECT PIPELINE -->
+  <script>
+    // 1. Logika untuk mendeteksi pilihan kehadiran (Yes / No) secara interaktif
+    const rsvpOptions = document.querySelectorAll('.rsvp-option');
+    let selectedAttendance = "💖 OFCC ><"; // Default pilihan awal
+
+    // Set status 'active' secara visual pada opsi pertama saat halaman dimuat
+    if (rsvpOptions.length > 0) {
+      rsvpOptions[0].classList.add('active');
+    }
+
+    rsvpOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Hapus class 'active' dari semua pilihan rsvp
+        rsvpOptions.forEach(opt => opt.classList.remove('active'));
+        
+        // Tambahkan class 'active' ke pilihan yang sedang di-klik
+        option.classList.add('active');
+        
+        // Ambil nilai dari atribut data-value
+        const attendanceValue = option.getAttribute('data-value');
+        if (attendanceValue === 'yes') {
+          selectedAttendance = "💖 OFCC ><";
+        } else {
+          selectedAttendance = "😢 NUHH :(";
+        }
+      });
+    });
+
+    // 2. Logika Submit Form dan Pengiriman Otomatis ke WhatsApp
+    const rsvpForm = document.getElementById('rsvp-form');
+    const rsvpPopup = document.getElementById('rsvp-popup');
+    const closePopupBtn = document.getElementById('close-rsvp-popup');
+
+    if (rsvpForm) {
+      rsvpForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Mengambil data dari input form berdasarkan ID di HTML lo
+        const guestName = document.getElementById('rsvp-name').value;
+        const guestPhone = document.getElementById('rsvp-phone').value;
+        const guestMessage = document.getElementById('rsvp-message').value || "-";
+
+        // =========================================================================
+        // PENTING: Ganti nomor di bawah ini dengan nomor WhatsApp penerima (Senn)
+        // Gunakan kode negara (62) di depan, JANGAN gunakan '+', spasi, atau angka '0'
+        // Contoh: "6281234567890"
+        // =========================================================================
+        const targetWhatsAppNumber = "628xxxxxxxxxx"; 
+
+        // Template pesan WhatsApp yang rapi, bersih, dan estetik
+        const whatsappMessageTemplate = `Halo Senn! ✨
+        
+Aku mau konfirmasi kehadiran untuk acara *Sweet 17th* kamu nih:
+
+📝 *Nama:* ${guestName}
+📱 *No. HP:* ${guestPhone}
+✨ *Kehadiran:* ${selectedAttendance}
+
+💬 *Pesan hangat:*
+"${guestMessage}"
+
+Sampai ketemu di sana ya! 🌊🎉`;
+
+        // Encoding pesan agar aman dan rapi saat dikirim lewat URL browser
+        const encodedText = encodeURIComponent(whatsappMessageTemplate);
+        const whatsappAPIUrl = `https://wa.me/${targetWhatsAppNumber}?text=${encodedText}`;
+
+        // Tampilkan Popup Sukses bawaan HTML lo (menambahkan class active & override display)
+        if (rsvpPopup) {
+          rsvpPopup.classList.add('active');
+          rsvpPopup.style.display = 'flex'; 
+        }
+
+        // Trigger efek ledakan confetti jika library canvas-confetti aktif secara global
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 } });
+        }
+
+        // Berikan jeda 1.8 detik agar tamu sempat melihat popup sukses sebelum diarahkan ke WA
+        setTimeout(() => {
+          window.open(whatsappAPIUrl, '_blank');
+        }, 1800);
+      });
+    }
+
+    // Aksi opsional jika tamu menekan tombol "Continue" di popup sebelum dialihkan otomatis
+    if (closePopupBtn) {
+      closePopupBtn.addEventListener('click', () => {
+        if (rsvpPopup) {
+          rsvpPopup.classList.remove('active');
+          rsvpPopup.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
