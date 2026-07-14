@@ -72,31 +72,57 @@
 <script src="js/effects.js"></script>
 <!-- ENGINE RSVP TO WHATSAPP DIRECT PIPELINE -->
  <!-- ENGINE RSVP TO GOOGLE SHEETS DIRECT PIPELINE -->
+<!-- ENGINE RSVP TO EMAIL CLIENT (FULLY TIGHTENED) -->
   <script>
-   // Logika Submit Form dan Pengiriman via Email Client (Metode ala WA)
+    // 1. Logika Klik untuk Opsi Kehadiran (Menghindari Error Undefined)
+    const rsvpOptions = document.querySelectorAll('.rsvp-option');
+    let selectedAttendance = "💖 OFCC ><"; // Default jika tamu langsung klik send
+
+    // Set opsi pertama jadi aktif saat halaman pertama kali dibuka
+    if (rsvpOptions.length > 0) {
+      rsvpOptions[0].classList.add('active');
+    }
+
+    rsvpOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Reset class active dari semua opsi
+        rsvpOptions.forEach(opt => opt.classList.remove('active'));
+        // Tambahkan ke yang di-klik
+        option.classList.add('active');
+        
+        // Ambil nilainya
+        const attendanceValue = option.getAttribute('data-value');
+        if (attendanceValue === 'yes') {
+          selectedAttendance = "💖 OFCC ><";
+        } else {
+          selectedAttendance = "😢 NUHH :(";
+        }
+      });
+    });
+
+    // 2. Logika Submit Form Utama via Mailto
     const rsvpForm = document.getElementById('rsvp-form');
     const rsvpPopup = document.getElementById('rsvp-popup');
-    const rsvpSubmitBtn = document.getElementById('rsvp-submit');
+    const closePopupBtn = document.getElementById('close-rsvp-popup');
 
     if (rsvpForm) {
       rsvpForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // Mengambil data dari input form
+        // Mengambil value input langsung dari ID HTML lo
         const guestName = document.getElementById('rsvp-name').value;
         const guestPhone = document.getElementById('rsvp-phone').value;
         const guestMessage = document.getElementById('rsvp-message').value || "-";
 
         // =========================================================================
-        // TENTUKAN EMAIL TUJUAN DI SINI:
-        // Ganti dengan alamat email lo atau email Senn yang aktif
+        // UBAH EMAIL TUJUAN DI SINI:
+        // Masukkan alamat email Senn atau email lo yang aktif
         // =========================================================================
         const targetEmail = "ferryoksim007@gmail.com"; 
 
-        // 1. Membuat Subject Email yang informatif
-        const emailSubject = `RSVP Sweet 17 Senn - ${guestName} (${selectedAttendance})`;
-
-        // 2. Template isi email yang rapi dan terstruktur
+        // Menyusun Subject & Isi Email
+        const emailSubject = `RSVP Sweet 17 Senn - ${guestName}`;
+        
         const emailBodyTemplate = `Halo Senn! 
 
 Aku mau konfirmasi kehadiran untuk acara Sweet 17th kamu nih:
@@ -110,29 +136,37 @@ Aku mau konfirmasi kehadiran untuk acara Sweet 17th kamu nih:
 
 Sampai ketemu di sana ya! 🌊🎉`;
 
-        // Encoding subject dan body agar aman dibaca oleh aplikasi email
+        // Proses enkripsi teks agar aman dibaca oleh aplikasi email (Gmail/Apple Mail)
         const encodedSubject = encodeURIComponent(emailSubject);
         const encodedBody = encodeURIComponent(emailBodyTemplate);
 
-        // Membuat link protocol mailto
+        // Link Mailto untuk memicu aplikasi email bawaan HP/Laptop
         const mailtoUrl = `mailto:${targetEmail}?subject=${encodedSubject}&body=${encodedBody}`;
 
-        // Tampilkan Popup Sukses bawaan HTML lo
+        // Tampilkan visual sukses (Popup & Confetti) bawaan template lo
         if (rsvpPopup) {
           rsvpPopup.classList.add('active');
           rsvpPopup.style.display = 'flex'; 
         }
 
-        // Trigger efek ledakan confetti biar tetep premium
         if (typeof confetti === 'function') {
           confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 } });
         }
 
-        // Jeda 1.5 detik biar tamu lihat popup dulu, baru aplikasi email-nya kebuka
+        // Redirect super mulus setelah jeda animasi 1.2 detik
         setTimeout(() => {
-          // Menggunakan window.location.href lebih mulus untuk mailto dibanding window.open
           window.location.href = mailtoUrl;
-        }, 1500);
+        }, 1200);
+      });
+    }
+
+    // Fungsi penutup popup jika tombol continue di-klik manual
+    if (closePopupBtn) {
+      closePopupBtn.addEventListener('click', () => {
+        if (rsvpPopup) {
+          rsvpPopup.classList.remove('active');
+          rsvpPopup.style.display = 'none';
+        }
       });
     }
   </script>
