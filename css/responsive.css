@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Responsive rules
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .role-cards {
+    grid-template-columns: 1fr;
+  }
+  .dresscode-cards {
+    grid-template-columns: 1fr;
+  }
+  .rsvp-options {
+    grid-template-columns: 1fr;
+  }
+  .password-card, .invite-card, .rsvp-card, .admin-card, .closing-card {
+    padding: 36px 22px;
+  }
+  .countdown {
+    gap: 8px;
+  }
+  .countdown .unit {
+    min-width: 54px;
+    padding: 10px 8px;
+  }
+  .countdown .unit .num {
+    font-size: 20px;
+  }
+  .music-toggle {
+    bottom: 16px;
+    right: 16px;
+    width: 46px;
+    height: 46px;
+  }
+  .cursor-sparkle {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .role-icon { font-size: 32px; }
+  .role-card h3 { font-size: 20px; }
+}
+
+/* Dashboard responsive */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-table-wrap {
+    overflow-x: auto;
+  }
+}

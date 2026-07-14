@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>See You Soon — Senn's Sweet 17</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body class="closing-page">
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <main class="page">
+    <div class="container">
+      <div class="closing-card glass fade-in">
+        <div class="eyebrow">Closing</div>
+        <h1>Thank you for celebrating my Sweet Seventeen.</h1>
+        <p class="lead">Your presence will make my day even more special.</p>
+
+        <p class="gift-note">Don't forget to bring me a gift... 'cause I'm a gift person. LOL 🎁</p>
+
+        <div class="countdown">
+          <div class="unit glass"><div class="num" id="cd-days">00</div><div class="label">Days</div></div>
+          <div class="unit glass"><div class="num" id="cd-hours">00</div><div class="label">Hours</div></div>
+          <div class="unit glass"><div class="num" id="cd-mins">00</div><div class="label">Mins</div></div>
+          <div class="unit glass"><div class="num" id="cd-secs">00</div><div class="label">Secs</div></div>
+        </div>
+
+        <p class="lead">Can't wait to celebrate with you!</p>
+        <p class="signoff">XOXO, Senn 🤍</p>
+
+        <div class="invite-actions">
+          <button class="btn btn-primary" id="see-you-btn">See You at the Beach 🏖️</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="popup-overlay" id="closing-popup">
+    <div class="popup-box glass-strong">
+      <h2>See You Soon!</h2>
+      <p>Thank you for being part of my Sweet Seventeen. 🌊</p>
+      <button class="btn btn-primary" id="close-popup">Close</button>
+    </div>
+  </div>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+    <script>
+    if (sessionStorage.getItem('senn_invite_unlocked') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
+<script src="js/effects.js"></script>
+  <script src="js/countdown.js"></script>
+</body>
+</html>

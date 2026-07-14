@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP — Senn's Sweet 17</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <main class="page">
+    <div class="container">
+      <form class="rsvp-card glass fade-in" id="rsvp-form">
+        <div class="eyebrow" style="text-align:center;">RSVP</div>
+        <h1>Will You Be There?</h1>
+        <p class="lead">Fill in your details and let us know!</p>
+
+        <div class="form-group">
+          <label for="rsvp-name">Full Name</label>
+          <input type="text" id="rsvp-name" required placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="rsvp-phone">Phone Number</label>
+          <input type="tel" id="rsvp-phone" required placeholder="08xx xxxx xxxx" />
+        </div>
+
+        <div class="form-group">
+          <label>Can u come to my 17th birthday??</label>
+          <div class="rsvp-options">
+            <div class="rsvp-option" data-value="yes">💖 OFCC &gt;&lt;</div>
+            <div class="rsvp-option" data-value="no">😢 NUHH :(</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rsvp-message">Message</label>
+          <textarea id="rsvp-message" placeholder="Leave a sweet message..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary rsvp-submit" id="rsvp-submit">SEND 💌</button>
+
+        <div class="step-dots">
+          <span></span><span></span><span></span><span class="active"></span>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div class="popup-overlay" id="rsvp-popup">
+    <div class="popup-box glass-strong">
+      <h2>Thank You!! 💕</h2>
+      <p>Can't wait to celebrate with you!</p>
+      <button class="btn btn-primary" id="close-rsvp-popup">Continue</button>
+    </div>
+  </div>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+    <script>
+    if (sessionStorage.getItem('senn_invite_unlocked') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
+<script src="js/effects.js"></script>
+  <script src="js/rsvp.js"></script>
+</body>
+</html>

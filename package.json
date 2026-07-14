@@ -1,0 +1,16 @@
+{
+  "name": "senn-sweet-17-invitation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium interactive Sweet 17 birthday invitation website",
+  "scripts": {
+    "db:generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@netlify/database": "^1.1.0",
+    "drizzle-orm": "^1.0.0-beta.22"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^1.0.0-beta.22"
+  }
+}

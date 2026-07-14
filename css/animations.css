@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Animations — fades, ripples, sparkles, confetti helpers
+   ========================================================================== */
+
+.fade-in {
+  animation: fadeInUp 0.9s cubic-bezier(.2,.9,.3,1) both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.25s; }
+.fade-in-delay-3 { animation-delay: 0.4s; }
+
+/* Page transition overlay */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--ivory);
+  z-index: 200;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+.page-transition.leaving {
+  animation: slideUpOut 0.6s cubic-bezier(.6,0,.4,1) forwards;
+}
+
+@keyframes slideUpOut {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Floating sparkles */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px 2px rgba(255,255,255,0.8);
+  animation: sparkle-float 3s ease-in-out infinite;
+}
+
+@keyframes sparkle-float {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.6); }
+  50% { opacity: 1; transform: translateY(-14px) scale(1); }
+}
+
+/* Floating bubbles */
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.15));
+  animation: bubble-rise linear infinite;
+}
+
+@keyframes bubble-rise {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(-110vh) translateX(20px); opacity: 0; }
+}
+
+/* Palm leaf sway */
+.palm-leaf {
+  position: absolute;
+  font-size: 60px;
+  transform-origin: bottom center;
+  animation: palm-sway 4s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes palm-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+/* Confetti piece (used by effects.js) */
+.confetti-piece {
+  position: fixed;
+  top: -10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 300;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.2;
+  }
+}
+
+/* Glass hover shimmer */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.glass {
+  position: relative;
+}
+.glass:hover::before {
+  opacity: 1;
+}
+
+/* Loading fade helpers */
+.fade-out-slow {
+  transition: opacity 1s ease;
+  opacity: 0;
+}

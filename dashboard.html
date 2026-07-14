@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Senn's Sweet 17</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .dashboard-wrap { max-width: 1100px; width: 100%; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 2; }
+    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 14px; }
+    .dashboard-header h1 { font-size: 28px; }
+    .stat-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+    .stat-card { padding: 22px; text-align: center; }
+    .stat-card .stat-num { font-size: 32px; font-weight: 700; color: var(--gold-dark); font-family: var(--font-heading); }
+    .stat-card .stat-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+    .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 24px; }
+    .panel { padding: 22px; }
+    .panel h2 { font-size: 18px; margin-bottom: 14px; }
+    .toolbar { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+    .toolbar input { flex: 1; min-width: 160px; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-glass); background: rgba(255,255,255,0.6); }
+    .toolbar button { padding: 10px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; }
+    .dashboard-table-wrap { max-height: 420px; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(176,141,95,0.15); }
+    th { color: var(--ink-soft); text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+    .badge { padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+    .badge-yes { background: rgba(207,175,134,0.25); color: var(--gold-dark); }
+    .badge-no { background: rgba(245,182,201,0.4); color: #a85070; }
+    .delete-btn { background: rgba(200,80,80,0.12); color: #c05050; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    .empty-row { text-align: center; color: var(--ink-soft); padding: 20px; }
+  </style>
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <div class="dashboard-wrap">
+    <div class="dashboard-header fade-in">
+      <h1>Admin Dashboard</h1>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-outline" id="refresh-btn">Refresh Data</button>
+        <button class="btn btn-primary" id="export-btn">Download Excel (.xlsx)</button>
+        <button class="btn btn-outline" id="logout-btn">Logout</button>
+      </div>
+    </div>
+
+    <div class="stat-cards fade-in">
+      <div class="stat-card glass"><div class="stat-num" id="stat-total">0</div><div class="stat-label">Total RSVP</div></div>
+      <div class="stat-card glass"><div class="stat-num" id="stat-coming">0</div><div class="stat-label">Coming</div></div>
+      <div class="stat-card glass"><div class="stat-num" id="stat-not-coming">0</div><div class="stat-label">Can't Come</div></div>
+    </div>
+
+    <div class="dashboard-grid fade-in">
+      <div class="panel glass">
+        <h2>Guest List</h2>
+        <div class="toolbar">
+          <input type="text" id="guest-search" placeholder="Search by name or phone..." />
+        </div>
+        <div class="dashboard-table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Phone</th><th>Attendance</th><th>Message</th><th>Action</th></tr>
+            </thead>
+            <tbody id="guest-table-body">
+              <tr><td colspan="5" class="empty-row">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel glass">
+        <h2>Attendance</h2>
+        <canvas id="attendance-pie"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

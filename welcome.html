@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Sweet 17th, Senn</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <main class="page">
+    <div class="container">
+      <div class="invite-card glass fade-in">
+        <div class="eyebrow">Happy Sweet 17th</div>
+        <div class="name-accent">SENN</div>
+        <p class="typed-text" id="typed-text"></p>
+
+        <div class="invite-actions">
+          <button class="btn btn-primary" id="continue-btn">Continue</button>
+        </div>
+
+        <div class="step-dots">
+          <span class="active"></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+    if (sessionStorage.getItem('senn_invite_unlocked') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
+<script src="js/effects.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof Typed !== 'undefined') {
+        new Typed('#typed-text', {
+          strings: [
+            "You have officially unlocked^500 my birthday invitation.^500 I'm so happy you're here."
+          ],
+          typeSpeed: 28,
+          showCursor: true,
+          cursorChar: '|',
+        });
+      } else {
+        document.getElementById('typed-text').textContent =
+          "You have officially unlocked my birthday invitation. I'm so happy you're here.";
+      }
+
+      document.getElementById('continue-btn').addEventListener('click', () => {
+        navigateWithTransition('save-date.html');
+      });
+    });
+  </script>
+</body>
+</html>

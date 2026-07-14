@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senn's Sweet 17 Invitation</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="logo-mark">
+      <div class="brand">SENN</div>
+      <div class="tagline">Sweet Seventeen</div>
+    </div>
+    <div class="wave-loader">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Role Selection -->
+  <main class="page">
+    <div class="container">
+      <div class="role-title fade-in">
+        <h1>Welcome!</h1>
+        <p class="lead">Please choose how you'd like to continue.</p>
+      </div>
+
+      <div class="role-cards">
+        <div class="role-card glass fade-in fade-in-delay-1" id="card-join">
+          <div class="role-icon">💌</div>
+          <h3>Join Invitation</h3>
+          <p>Join Senn's Sweet 17 Birthday Invitation</p>
+          <button class="btn btn-primary">Enter</button>
+        </div>
+
+        <div class="role-card glass fade-in fade-in-delay-2" id="card-admin">
+          <div class="role-icon">🔑</div>
+          <h3>Admin</h3>
+          <p>Private Dashboard</p>
+          <button class="btn btn-outline">Login</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="js/effects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

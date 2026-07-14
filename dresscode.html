@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dress Code — Senn's Sweet 17</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <main class="page">
+    <div class="container">
+      <div class="invite-card glass fade-in">
+        <div class="eyebrow">Dress Code</div>
+        <h1 style="margin-bottom: 20px;">What to Wear</h1>
+
+        <div class="dresscode-cards">
+          <div class="dress-card glass">
+            <div class="dress-swatch pink"></div>
+            <h3>Boys</h3>
+            <p>Pink</p>
+          </div>
+          <div class="dress-card glass">
+            <div class="dress-swatch creme"></div>
+            <h3>Girls</h3>
+            <p>Creme</p>
+          </div>
+        </div>
+
+        <p class="lead">Dress up, bring your best smile, and let's make unforgettable memories together.</p>
+
+        <div class="invite-actions">
+          <button class="btn btn-primary" id="continue-btn">Continue</button>
+        </div>
+
+        <div class="step-dots">
+          <span></span><span></span><span class="active"></span><span></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+    <script>
+    if (sessionStorage.getItem('senn_invite_unlocked') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
+<script src="js/effects.js"></script>
+  <script>
+    document.getElementById('continue-btn').addEventListener('click', () => {
+      navigateWithTransition('rsvp.html');
+    });
+  </script>
+</body>
+</html>

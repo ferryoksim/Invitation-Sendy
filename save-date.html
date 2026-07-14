@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save the Date — Senn's Sweet 17</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <canvas id="ocean-canvas"></canvas>
+  <div class="bg-decor"></div>
+
+  <main class="page">
+    <div class="container">
+      <div class="invite-card glass fade-in">
+        <div class="eyebrow">Save the Date</div>
+
+        <div class="date-block">
+          <div class="big-date">15 August 2026</div>
+          <div class="time">12.40 WIB</div>
+        </div>
+
+        <div class="location-block">
+          <h3>Blackowl Kelapa Gading</h3>
+          <p>Come celebrate with us at this dreamy spot.</p>
+          <a
+            class="btn btn-outline"
+            href="https://www.google.com/maps/search/?api=1&query=Blackowl+Kelapa+Gading"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open Maps</a>
+        </div>
+
+        <p class="quote-block">"Don't be late... I'll be waiting for you."</p>
+
+        <div class="invite-actions">
+          <button class="btn btn-primary" id="continue-btn">Continue</button>
+        </div>
+
+        <div class="step-dots">
+          <span></span><span class="active"></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="music-toggle glass" id="music-toggle">🔇</button>
+  <audio id="bg-audio" loop preload="none">
+    <source src="assets/audio/ocean-piano.mp3" type="audio/mpeg" />
+  </audio>
+
+    <script>
+    if (sessionStorage.getItem('senn_invite_unlocked') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
+<script src="js/effects.js"></script>
+  <script>
+    document.getElementById('continue-btn').addEventListener('click', () => {
+      navigateWithTransition('dresscode.html');
+    });
+  </script>
+</body>
+</html>
